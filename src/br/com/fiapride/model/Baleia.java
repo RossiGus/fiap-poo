@@ -6,13 +6,18 @@ package br.com.fiapride.model;
         private String cor;
         private String nome;
         private double tamanhoEmMetros;
+        private Oceano oceano;
 
-        public Baleia(String nome, String cor) {
+        public Baleia(String nome, String cor, Oceano oceano) {
             this.setNome(nome);
             this.setCor(cor);
             this.setTamanhoEmMetros(2.0);
+            this.oceano = oceano;
         }
 
+        public Oceano getOceano() {
+        return oceano;
+        }
 
         public String getNome() {
             return this.nome;
