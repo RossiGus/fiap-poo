@@ -1,74 +1,36 @@
 package br.com.fiapride.model;
 
+public class Baleia extends Animal {
 
-    public class Baleia {
+    private Oceano oceano;
 
-        private String cor;
-        private String nome;
-        private double tamanhoEmMetros;
-        private Oceano oceano;
-
-        public Baleia(String nome, String cor, Oceano oceano) {
-            this.setNome(nome);
-            this.setCor(cor);
-            this.setTamanhoEmMetros(2.0);
-            this.oceano = oceano;
-        }
-
-        public Oceano getOceano() {
-        return oceano;
-        }
-
-        public String getNome() {
-            return this.nome;
-        }
-
-        public String getCor() {
-            return this.cor;
-        }
-
-        public double getTamanhoEmMetros() {
-            return this.tamanhoEmMetros;
-        }
-
-
-        private void setNome(String nome) {
-            this.nome = nome;
-        }
-
-        private void setCor(String cor) {
-            this.cor = cor;
-        }
-
-        private void setTamanhoEmMetros(double novoTamanho) {
-            if (novoTamanho > 2.0) {
-                this.tamanhoEmMetros = novoTamanho;
-            } else {
-                System.out.println("Erro: A baleia não cresceu: verificar o que aconteceu!");
-            }
-        }
-
-
-
-        public void crescer(double tempo) {
-            if (tempo <= 0) {
-                System.out.println("A baleia não cresceu: pouco tempo se passou.");
-                return;
-            }
-
-            double novoTamanho = this.tamanhoEmMetros + (tempo * 0.5);
-
-            setTamanhoEmMetros(novoTamanho);
-
-            System.out.println("A baleia cresceu! Novo tamanho: " + this.getTamanhoEmMetros() + "m");
-        }
-
-        public boolean migrar(double distancia) {
-            if (distancia <= 3) {
-                System.out.println("A distância é muito curta para uma migração.");
-                return false;
-            }
-            System.out.println(this.nome + " iniciou sua migração de " + distancia + "km.");
-            return true;
-        }
+    public Baleia(String nome, String cor, Oceano oceano) {
+        super(nome, cor);
+        setOceano(oceano);
     }
+
+    public Oceano getOceano() {
+        return oceano;
+    }
+
+    private void setOceano(Oceano oceano) {
+        if (oceano == null) {
+            throw new IllegalArgumentException("Erro: O oceano não pode ser nulo.");
+        }
+        this.oceano = oceano;
+    }
+
+    public boolean migrar(double distanciaKm) {
+        if (distanciaKm <= 3) {
+            System.out.println("Erro: A distância é muito curta para uma migração.");
+            return false;
+        }
+        System.out.println(getNome() + " iniciou sua migração de " + distanciaKm + "km.");
+        return true;
+    }
+
+    @Override
+    public void emitirSom() {
+        System.out.println(getNome() + " emite: Woooooom...");
+    }
+}
